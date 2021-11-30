@@ -31,23 +31,24 @@ function loadLayer(capa, valor) {
     mapa.addLayer(layerObj);
 
     mapa.on("click", srcName, (e) => {
-      const coordinates = e.features[0].geometry.coordinates.slice();
-      const p = e.features[0].properties;
-      const atrib = {
+      const coordinates = e.features[0].geometry.coordinates.slice(),
+      p = e.features[0].properties,
+      atrib = {
         name: p["name"] || "N/D",
         cod_sisa: p["ref:sisa_codigo"] || "N/D",
         tipo_sisa: p["ref:sisa_tipologia"] || "N/D",
         id: p["@id"],
-      };
+      },
+      content = `<strong>${atrib.name}</strong></br>Cód. SISA: ${atrib.cod_sisa}</br>Tipo SISA: ${atrib.tipo_sisa}</br><a href='https://www.osm.org/${atrib.id}' target='_blank'>Ver en OpenStreetMap</a></br><a href='#14/${coordinates[1]}/${coordinates[0]}'>acercar</a>`;
 
       while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
       }
 
-      new mapboxgl.Popup()
+      new mapboxgl.Popup({className: 'popup'})
         .setLngLat(coordinates)
         .setHTML(
-          `<strong>${atrib.name}</strong></br>Cód. SISA: ${atrib.cod_sisa}</br>Tipo SISA: ${atrib.tipo_sisa}</br><a href='https://www.osm.org/${atrib.id}' target='_blank'>Ver en OpenStreetMap</a></br><a href='#14/${coordinates[1]}/${coordinates[0]}'>acercar</a>`
+          content
         )
         .addTo(mapa);
     });
