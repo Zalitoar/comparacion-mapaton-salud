@@ -32,4 +32,3 @@ let layerObj = {
   filter: ["all", ["==", "$type", "Point"], ["!=", "meta", "midpoint"]],
 },
 lastLayer = '';
-
