@@ -1,0 +1,68 @@
+.map-overlay {
+  font: 12px/20px "Helvetica Neue", Arial, Helvetica, sans-serif;
+  position: absolute;
+  width: 25%;
+  top: 0;
+  left: 0;
+  padding: 10px;
+  color: white;
+}
+
+.map-overlay .map-overlay-inner {
+  background-color: #191a1a;
+  opacity: 0.8;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.map-overlay h2 {
+  line-height: 24px;
+  display: block;
+  margin: 0 0 10px;
+}
+
+.map-overlay h3 {
+  /* line-height: 24px; */
+  display: block;
+  margin: 0 0 10px;
+}
+
+.map-overlay .legend .bar {
+  height: 10px;
+  width: 100%;
+  /* background: linear-gradient(to right, #fca107, #7f3121); */
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 0, 1) 0%,
+    rgba(255, 40, 0, 1) 50%,
+    rgba(0, 0, 255, 1) 100%
+  );
+}
+
+.map-overlay input {
+  background-color: transparent;
+  display: inline-block;
+  width: 100%;
+  position: relative;
+  margin: 0;
+}
+
+input[type="range"] {
+  cursor: ew-resize;
+}
+
+input[type="radio"] {
+  cursor: pointer;
+}
+
+.lgnd-labels {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.hidden {
+  display: none;
+}

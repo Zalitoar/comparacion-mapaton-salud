@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+    <title>Comparador Mapaton Salud OSM Argentina</title>
+    <meta name="description" content="Comparación de centros de salud mapeados en el Mapaton Salud OSM Argentina">
+
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="https://mapa.ign.gob.ar/">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Comparador Mapaton Salud OSM Argentina">
+    <meta property="og:description" content="Comparador de centros de salud mapeados en el Mapaton Salud OSM Argentina">
+    <meta property="og:image" content="https://wiki.openstreetmap.org/w/images/4/45/OSM_Argentina_Logo.svg">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="mapa.ign.gob.ar">
+    <meta property="twitter:url" content="https://mapa.ign.gob.ar/">
+    <meta name="twitter:title" content="Comparador Mapaton Salud OSM Argentina">
+    <meta name="twitter:description"
+        content="Comparación de centros de salud mapeados en el Mapaton Salud OSM Argentina">
+    <meta name="twitter:image" content="https://wiki.openstreetmap.org/w/images/4/45/OSM_Argentina_Logo.svg">
+
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.6.0/mapbox-gl.js"></script>
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.6.0/mapbox-gl.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/slider.css" rel="stylesheet">
+</head>
+
+<body>
+    <div id="map"></div>
+    <script src="js/mapa.js"></script>
+
+    <div class="map-overlay top">
+        <div class="map-overlay-inner">
+            <h2>Comparación mapatón de centros de salud covid-19</h2>
+            <div class="lgnd-labels">
+                <div>
+                    <input type="radio" name="tipo" id="radio-hospitales">
+                    <label for="radio-hospitales">Hospitales</label>
+                </div>
+                <div>
+                    <input type="radio" name="tipo" id="radio-clinicas">
+                    <label for="radio-clinicas">Clínicas</label>
+                </div>
+                <div>
+                    <input type="radio" name="tipo" id="radio-consultorios">
+                    <label for="radio-consultorios">Consultorios</label>
+                </div>
+            </div>
+        </div>
+        <div class="map-overlay-inner">
+            <div id="legend" class="legend">
+                <div class="bar"></div>
+                <div class="lgnd-labels">
+                    <div>7-5-20</div>
+                    <div>12-5-20</div>
+                    <div>22-11-21</div>
+                </div>
+            </div>
+        </div>
+        <div class="map-overlay-inner hidden">
+            <label for="slider-hospitales">
+                <h3>Hospitales</h3>
+            </label>
+            <input id="slider-hospitales" type="range" min="0" max="2" step="1" value="0">
+        </div>
+        <div class="map-overlay-inner hidden">
+            <label for="slider-clinicas">
+                <h3>Clínicas</h3>
+            </label>
+            <input id="slider-clinicas" type="range" min="0" max="2" step="1" value="0">
+        </div>
+        <div class="map-overlay-inner hidden">
+            <label for="slider-consultorios">
+                <h3>Salas y consultorios</h3>
+            </label>
+            <input id="slider-consultorios" type="range" min="0" max="2" step="1" value="0">
+        </div>
+    </div>
+    <script src="js/slider.js"></script>
+</body>
+
+</html>
