@@ -66,3 +66,12 @@ input[type="radio"] {
 .hidden {
   display: none;
 }
+
+@media (max-width:480px)  {
+  .map-overlay {
+    width: 60%;
+  }
+  .map-overlay .map-overlay-inner {
+    margin-bottom: 2px;
+  }
+}
