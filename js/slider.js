@@ -42,14 +42,14 @@ function loadLayer(capa, valor) {
           tipo_sisa: p["ref:sisa_tipologia"] || "N/D",
           id: p["@id"],
           timestamp: new Date(p["@timestamp"]).toUTCString(),
-          changeset: 'changeset/' + p["@changeset"],
+          changeset: p["@changeset"],
           version: p["@version"],
         },
         fechaPrefix = atrib.version > 1 ?  `modificado: ` : `creado: `,
         content = `<strong>${atrib.name}</strong>
           </br>código SISA: ${atrib.cod_sisa}
           </br>tipo SISA: ${atrib.tipo_sisa}
-          </br><a href='${osmUrl}${atrib.changeset}' target='_blank'>conjunto de cambios</a>
+          </br><a href='${osmUrl}changeset/${atrib.changeset}' target='_blank'>conjunto de cambios ${atrib.changeset}</a>
           </br>versión del objeto: ${atrib.version}
           </br>${fechaPrefix}</br>${atrib.timestamp}
           </br><a href='${osmUrl}${atrib.id}' target='_blank'>ver en OpenStreetMap</a>
@@ -80,10 +80,16 @@ async function countFeatures(capa, valor) {
   await fetch(file)
     .then((res) => res.json())
     .then((data) => {
-      cantidad = Object.keys(data.features).length;
+      cantidad = 0;
+      data.features.forEach( f => {
+        let p = f.properties.amenity;
+        if (p === 'hospital' || p === 'clinic' || p === 'doctors') {
+          cantidad++;
+        } 
+      }) //Object.keys(data.features).length;
       let label = document.getElementById(activeInput)
-        .previousElementSibling
-        .firstElementChild;
+      .previousElementSibling
+      .firstElementChild;
       label.textContent = `${capa} - ${cantidad} objetos`;
     })
     .catch((err) => {
