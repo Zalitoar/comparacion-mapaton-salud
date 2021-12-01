@@ -57,18 +57,9 @@ function loadLayer(capa, valor) {
 }
 
 function cleanMap(capa, valor) {
-  //console.log(lastLayer + ' ' + capa + '-' + valorTxt[valor])
   if (lastLayer != "" && lastLayer != capa + "-" + valorTxt[valor]) {
     mapa.removeLayer(lastLayer);
   }
-  /*  valorTxt.forEach((v) => {
-    if (v != valorTxt[valor]) {
-      let capaTxt = capa + "-" + v;
-      if (mapa.getLayer(capaTxt)) {
-        mapa.removeLayer(capaTxt);
-      }
-    }
-  }); */
 }
 
 async function countFeatures(capa, valor) {
