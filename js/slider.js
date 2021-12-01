@@ -5,8 +5,8 @@ let cantidad, activeInput;
 
 radios.forEach((radio) => {
   radio.addEventListener("change", (e) => {
-    activeInput = e.target.id.replace("radio", "slider"),
-      activeSlider = document.getElementById(activeInput).parentNode;
+    (activeInput = e.target.id.replace("radio", "slider")),
+      (activeSlider = document.getElementById(activeInput).parentNode);
     activeSlider.classList.remove("hidden");
     sliders.forEach((s) => {
       if (s.id != activeInput) {
@@ -68,6 +68,10 @@ async function countFeatures(capa, valor) {
     .then((res) => res.json())
     .then((data) => {
       cantidad = Object.keys(data.features).length;
+      let label = document.getElementById(activeInput)
+        .previousElementSibling
+        .firstElementChild;
+      label.textContent = `${capa} - ${cantidad} objetos`;
     })
     .catch((err) => {
       console.error(err);
@@ -82,11 +86,6 @@ sliders.forEach((slider) => {
     cleanMap(capa, valor);
     loadLayer(capa, valor);
     countFeatures(capa, valor);
-
-    document.getElementById(activeInput)
-    .previousElementSibling
-    .firstElementChild
-    .textContent = `${capa} - ${cantidad} objetos` ;
 
     lastLayer = capa + "-" + valorTxt[valor];
   });
