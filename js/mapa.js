@@ -13,7 +13,8 @@ const mapa = new mapboxgl.Map({
 
 const fecha = ["2020-05-07", "2020-05-12", "2021-11-22"],
   valorTxt = ["antes", "mapaton", "hoy"],
-  color = ["#d1d005", "#d12b05", "#0805cd"];
+  color = ["#d1d005", "#d12b05", "#0805cd"]
+  osmUrl = 'https://www.openstreetmap.org/';
 
 let layerObj = {
   id: null,

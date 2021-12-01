@@ -41,8 +41,21 @@ function loadLayer(capa, valor) {
           cod_sisa: p["ref:sisa_codigo"] || "N/D",
           tipo_sisa: p["ref:sisa_tipologia"] || "N/D",
           id: p["@id"],
+          timestamp: new Date(p["@timestamp"]).toUTCString(),
+          changeset: 'changeset/' + p["@changeset"],
+          version: p["@version"],
         },
-        content = `<strong>${atrib.name}</strong></br>Cód. SISA: ${atrib.cod_sisa}</br>Tipo SISA: ${atrib.tipo_sisa}</br><a href='https://www.osm.org/${atrib.id}' target='_blank'>Ver en OpenStreetMap</a></br><a href='#14/${coordinates[1]}/${coordinates[0]}'>acercar</a>`;
+        fechaPrefix = atrib.version > 1 ?  `modificado: ` : `creado: `,
+        content = `<strong>${atrib.name}</strong>
+          </br>código SISA: ${atrib.cod_sisa}
+          </br>tipo SISA: ${atrib.tipo_sisa}
+          </br><a href='${osmUrl}${atrib.changeset}' target='_blank'>conjunto de cambios</a>
+          </br>versión del objeto: ${atrib.version}
+          </br>${fechaPrefix}</br>${atrib.timestamp}
+          </br><a href='${osmUrl}${atrib.id}' target='_blank'>ver en OpenStreetMap</a>
+          </br><a href='#14/${coordinates[1]}/${coordinates[0]}'>acercar</a>`;
+
+      mapa.panTo(e.lngLat);
 
       while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
         coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
