@@ -1,7 +1,7 @@
 const radios = document.querySelectorAll('*[id^="radio"]'),
   sliders = document.querySelectorAll('*[id^="slider"]');
 
-let cantidad, activeInput;
+let cantidad, rels, vias, nodos, activeInput;
 
 radios.forEach((radio) => {
   radio.addEventListener("change", (e) => {
@@ -45,7 +45,7 @@ function loadLayer(capa, valor) {
           changeset: p["@changeset"],
           version: p["@version"],
         },
-        fechaPrefix = atrib.version > 1 ?  `modificado: ` : `creado: `,
+        fechaPrefix = atrib.version > 1 ? `modificado: ` : `creado: `,
         content = `<strong>${atrib.name}</strong>
           </br>código SISA: ${atrib.cod_sisa}
           </br>tipo SISA: ${atrib.tipo_sisa}
@@ -80,17 +80,24 @@ async function countFeatures(capa, valor) {
   await fetch(file)
     .then((res) => res.json())
     .then((data) => {
-      cantidad = 0;
-      data.features.forEach( f => {
-        let p = f.properties.amenity;
-        if (p === 'hospital' || p === 'clinic' || p === 'doctors') {
+      cantidad = rels = vias = nodos = 0;
+      data.features.forEach((f) => {
+        let p = f.properties,
+          a = p.amenity;
+        if (a === "hospital" || a === "clinic" || a === "doctors") {
           cantidad++;
-        } 
-      }) //Object.keys(data.features).length;
-      let label = document.getElementById(activeInput)
-      .previousElementSibling
-      .firstElementChild;
-      label.textContent = `${capa} - ${cantidad} objetos`;
+          if (p["@id"].includes("node")) {
+            nodos++;
+          }
+          if (p["@id"].includes("way")) {
+            vias++;
+          }
+          if (p["@id"].includes("relation")) {
+            rels++;
+          }
+        }
+      });
+      updateCounts();
     })
     .catch((err) => {
       console.error(err);
@@ -109,3 +116,8 @@ sliders.forEach((slider) => {
     lastLayer = capa + "-" + valorTxt[valor];
   });
 });
+
+function updateCounts() {
+  let cantLabel = `${cantidad} objetos | ${nodos} nodos | ${vias} vías | ${rels} relaciones`, labelContainer = document.getElementById(activeInput).nextElementSibling;
+  labelContainer.innerText = cantLabel;
+}
